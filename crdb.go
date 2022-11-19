@@ -84,15 +84,3 @@ func (client *Client) Query(ctx context.Context, sql string, args ...interface{}
 	log.Printf("result: %v\n", result)
 	return
 }
-
-func (client *Client) Exec(ctx context.Context, sql string, args ...interface{})(err error){
-
-	log.Printf("begin exec: %s, args: %v\n", sql, args)
-	commondTag, err := client.Pool.Exec(ctx, sql, args...)
-	if err != nil{
-		log.Printf("err: %v\n", err)
-		return
-	}
-	log.Printf("commondTag: %s\n", commondTag.String())
-	return
-}
