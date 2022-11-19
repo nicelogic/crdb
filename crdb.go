@@ -11,7 +11,7 @@ import (
 )
 
 type Client struct {
-	pool *pgxpool.Pool
+	Pool *pgxpool.Pool
 }
 
 type clientConfig struct {
@@ -49,7 +49,7 @@ func (client *Client) Init(ctx context.Context, basicConfigFilePath string, dbNa
 		log.Println("error configuring the database: ", err)
 		return err
 	}
-	client.pool, err = pgxpool.ConnectConfig(ctx, config)
+	client.Pool, err = pgxpool.ConnectConfig(ctx, config)
 	if err != nil {
 		log.Println("error connecting to the database: ", err)
 		return err
@@ -60,15 +60,8 @@ func (client *Client) Init(ctx context.Context, basicConfigFilePath string, dbNa
 
 func (client *Client) Query(ctx context.Context, sql string, args ...interface{})(result []any, err error){
 
-	connection, err := client.pool.Acquire(ctx)
-	defer connection.Release()
-	if err != nil {
-		log.Printf("dbpool acquire fail: %v", err)
-		return 
-	}
-
 	log.Printf("begin query: %s, args: %v\n", sql, args)
-	rows, err := connection.Query(ctx, sql, args...)
+	rows, err := client.Pool.Query(ctx, sql, args...)
 	if err != nil {
 		log.Printf("err: %v\n", err)
 		return
@@ -94,15 +87,8 @@ func (client *Client) Query(ctx context.Context, sql string, args ...interface{}
 
 func (client *Client) Exec(ctx context.Context, sql string, args ...interface{})(err error){
 
-	connection, err := client.pool.Acquire(ctx)
-	defer connection.Release()
-	if err != nil {
-		log.Printf("dbpool acquire fail: %v", err)
-		return 
-	}
-
 	log.Printf("begin exec: %s, args: %v\n", sql, args)
-	commondTag, err := connection.Exec(ctx, sql, args...)
+	commondTag, err := client.Pool.Exec(ctx, sql, args...)
 	if err != nil{
 		log.Printf("err: %v\n", err)
 		return

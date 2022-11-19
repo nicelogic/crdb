@@ -56,7 +56,7 @@ func TestExec(t *testing.T) {
 	VALUES ($1, $2, $3, $4)
 	`
 	updateTime := time.Now().Format(time.RFC3339)
-	err = client.Exec(ctx, UpsertAddContactsApply, "4", "2", "please  me", updateTime)
+	err = client.Exec(ctx, UpsertAddContactsApply, "5", "2", "please  me", updateTime)
 	if err != nil{
 		t.Errorf("exec error: %v\n", err)
 	}
