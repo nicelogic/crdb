@@ -29,7 +29,7 @@ func (client *Client) Init(ctx context.Context, basicConfigFilePath string, dbNa
 	clientConfig := clientConfig{}
 	err = config.Init(basicConfigFilePath, &clientConfig)
 	if err != nil {
-		log.Println("config init fail, err: ", err)
+		log.Println("config init err: ", err)
 		return err
 	}
 	log.Printf("%#v\n", clientConfig)
