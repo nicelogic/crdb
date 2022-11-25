@@ -1,4 +1,4 @@
-module crdb
+module github.com/nicelogic/crdb
 
 go 1.19
 

@@ -8,7 +8,7 @@ import (
 func TestInit(t *testing.T) {
 	client := Client{}
 	ctx := context.Background()
-	err := client.Init(ctx, "/Users/bryan.wu/code/secret/config-crdb.yml", "contacts", 4)
+	err := client.Init(ctx, "../backend-app-0/test/config/config-crdb.yml", "contacts", 4)
 	if err != nil {
 		t.Errorf("cient init error: %v\n", err)
 	}
@@ -17,7 +17,7 @@ func TestInit(t *testing.T) {
 func TestQuery(t *testing.T) {
 	client := Client{}
 	ctx := context.Background()
-	err := client.Init(ctx, "/Users/bryan.wu/code/secret/config-crdb.yml", "contacts", 4)
+	err := client.Init(ctx, "../backend-app-0/test/config/config-crdb.yml", "contacts", 4)
 	if err != nil {
 		t.Errorf("cient init error: %v\n", err)
 	}
