@@ -24,7 +24,10 @@ type clientConfig struct {
 	Max_connection_idle_time int
 }
 
-func (client *Client) Init(ctx context.Context, basicConfigFilePath string, dbName string, maxConnections int32) (err error) {
+func (client *Client) Init(ctx context.Context,
+	 basicConfigFilePath string,
+	 dbName string,
+	 maxConnections int32) (err error) {
 
 	clientConfig := clientConfig{}
 	err = config.Init(basicConfigFilePath, &clientConfig)
