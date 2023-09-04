@@ -57,3 +57,30 @@ func (client *Client) Init(ctx context.Context, basicConfigFilePath string, dbNa
 	log.Printf("connect crdb success\n")
 	return nil
 }
+
+// func (client *Client) Query(ctx context.Context, sql string, args ...interface{})(result []any, err error){
+
+// 	log.Printf("begin query: %s, args: %v\n", sql, args)
+// 	rows, err := client.Pool.Query(ctx, sql, args...)
+// 	if err != nil {
+// 		log.Printf("err: %v\n", err)
+// 		return
+// 	}
+// 	defer rows.Close()
+// 	for rows.Next() {
+// 		values, valuesErr := rows.Values()
+// 		if valuesErr != nil{
+// 			err = valuesErr
+// 			log.Printf("values error: %v", err)
+// 			return
+// 		}
+// 		result = append(result, values)
+// 	}
+// 	err = rows.Err()
+// 	if err != nil {
+// 		log.Printf("rows error: %v", rows.Err())
+// 		return
+// 	}
+// 	log.Printf("result: %v\n", result)
+// 	return
+// }
